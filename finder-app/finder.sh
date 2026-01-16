@@ -1,3 +1,4 @@
+#!/bin/bash
 # Accepts the following runtime arguments:
 #  the first argument is a path to a directory on the filesystem, referred to below as filesdir;
 #  the second argument is a text string which will be searched within these files, referred to below as searchstr
@@ -8,14 +9,13 @@
 
 # Prints a message "The number of files are X and the number of matching lines are Y" where X is the number of files in the directory and all subdirectories
 #  and Y is the number of matching lines found in respective files, where a matching line refers to a line which contains searchstr (and may also contain additional content).
-#!/bin/bash
 
 numArgs=$#
 # echo numArgs: ${numArgs}
 arg1=$1
 arg2=$2
-# echo Arg1: ${arg1}
-# echo Arg2: ${arg2}
+echo Arg1: ${arg1}
+echo Arg2: ${arg2}
 
 if [ ${numArgs} -eq 2 ]
 then
@@ -54,11 +54,8 @@ while IFS= read -r -d '' file; do
                 fi
             fi  
         done < $file
-    else
-        echo Not a file
-        continue
     fi
 done < <(find "$1" -type f -print0)
 
-echo Found $numFilesFound with $numLinesFound lines containing $2 in directory $1
+echo The number of files are $numFilesFound and the number of matching lines are $numLinesFound in Arg1: $1
 exit 0
